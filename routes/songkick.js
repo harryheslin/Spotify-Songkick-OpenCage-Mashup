@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
   console.log("Query Data!")
   //const q = qs.parse(req.query);
   console.log(req.query);
-  res.send('User Page');
+  res.send('Songkick Page');
 });
 
 
