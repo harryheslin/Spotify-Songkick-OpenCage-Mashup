@@ -4,10 +4,12 @@ block content
   //- h1= title
   //- p Welcome to #{title}
   div.title-bar
-   h1.page-title heslharr Top Artist Gig Guide
+   h1.page-title #{spotify[0]} Top Artist Gig Guide
   div(class="page-div")
     div.small-api-trans
       img.logos(src="../images/spotifylogo.png" alt="Spotify Logo")
+      h1 Artist #1 is #{spotify[1]}
+      img.logos(src= spotify[2] alt="Spotify Logo")
     div.small-api-trans.second-trans
       img.logos(src="../images/sk-badge.png" alt="SongKick Logo")
     div.small-api-trans.third-trans
