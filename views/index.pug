@@ -8,21 +8,86 @@ block content
   div(class="page-div")
     div.small-api-trans
       img.logos(src="../images/spotifylogo.png" alt="Spotify Logo")
-      h1 Artist #1 is #{spotify[1]}
-      img.logos(src= spotify[2] alt="Spotify Logo")
+      h1.div-titles Your Top Artists
+      -for (var i = 1; i < 21; i+=2)
+        div.artist-pic-div
+          img.artist-pic(src= spotify[i+1] alt="Artist Image")
+          h2 #{spotify[i]}
+        
     div.small-api-trans.second-trans
       img.logos(src="../images/sk-badge.png" alt="SongKick Logo")
+      h1.div-titles Upcoming Gigs
+      //- select.div-titles#citySelect(onclick='changeCity()')
+      //-  option(value='Brisbane') QLD
+      //-  option(value='Sydney') NSW
+      //-  option(value='Melbourne') VIC
+      //-  option(value='Darwin') NT
+      //-  option(value='Hobart') TAS
+      //-  option(value='Adelaide') SA
+      //-  option(value='Perth') WA
+      //-  option(value='Canberra') ACT
+      -for (var i = 0; i < songkick.length; i+=2)
+        div.artist-pic-div
+          h4 #{songkick[i+1]}
+          h4 #{songkick[i].displayName}
     div.small-api-trans.third-trans
       #map
         script.
-          var mymap = L.map('map').setView([-27.467331464, 153.02333324], 12);
-          L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox/streets-v11',
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: "pk.eyJ1IjoiaGFycnloZXNsaW4iLCJhIjoiY2tlNnNkb213MTJuMTJxcXZ5aGdtbndqbCJ9.TTcRH7l0Q5f7Hmv3l5efvQ"
-          }).addTo(mymap);
+          let x = -27.467331464;
+          let y = 153.02333324;
+
+            var mymap = L.map('map').setView([x, y], 12);
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
+              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+              maxZoom: 18,
+              id: 'mapbox/streets-v11',
+              tileSize: 512,
+              zoomOffset: -1,
+              accessToken: "pk.eyJ1IjoiaGFycnloZXNsaW4iLCJhIjoiY2tlNnNkb213MTJuMTJxcXZ5aGdtbndqbCJ9.TTcRH7l0Q5f7Hmv3l5efvQ"
+            }).addTo(mymap);
+            
+
+          //- function changeCity(){
+          //-   var e = document.getElementById("citySelect");
+          //-   var value = e.options[e.selectedIndex].value;
+          //-   var city = e.options[e.selectedIndex].text;
+
+          //-   switch(city) {
+          //-   case "Brisbane":
+          //-   x = -27.467331464;
+          //-   y = 153.02333324;
+          //-   break;
+          //-   case "Sydney":
+          //-   x = -33.8688;
+          //-   y = 151.2093;
+          //-   break;
+          //-   case "Melbourne":
+          //-   x = -37.8136;
+          //-   y = 144.9631;
+          //-   break;
+          //-   case "Darwin":
+          //-   x = -12.4634;
+          //-   y = 130.8456;
+          //-   break; 
+          //-   case "Hobart":
+          //-   x = -42.8821;
+          //-   y = 147.3272;
+          //-   break; 
+          //-   case "Adelaide":
+          //-   x = -34.9285;
+          //-   y = 138.6007;
+          //-   break; 
+          //-   case "Perth":
+          //-   x = -31.9505;
+          //-   y = 115.8605;
+          //-   break; 
+          //-   case "Canberra":
+          //-   x = -35.2809;
+          //-   y = 149.1300;
+          //-   break;   
+          //-   }
+          //-   mymap.flyTo(new L.LatLng(x, y), 12);
+          //- };
+
 
       

@@ -29,10 +29,62 @@ body {
 }
 
 .logos {
-  width: 30%;
+  width: 35%;
   height: auto;
   padding-top: 10px;
   padding-left: 10px;
+  margin-bottom: 20px;
+
+}
+
+.div-titles{
+  float: right;
+  font-size: 165%;
+  color: white;
+  margin-right: 5%;
+  margin-top: 15%;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+  display: inline-block;
+  padding-left: 5%;
+  padding-right: 1%;
+  font-size: calc(0.1em + 1vw);
+
+}
+
+h4 {
+  text-align: left;
+  color: white;
+  display: inline-block;
+  padding-left: 5%;
+  padding-right: 1%;
+  font-size: calc(0.1em + 1vw);
+
+}
+
+
+#citySelect {
+  background: rgb(85, 79, 79);
+  color: white;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+
+}
+
+.artist-pic {
+  display: inline;
+  padding-left: 10px;
+  width: 30%;
+  height: auto;
+}
+
+.artist-pic-div {
+  width: 100%;
 }
 
 .page-div {

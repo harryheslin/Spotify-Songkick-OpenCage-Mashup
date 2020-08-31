@@ -45,7 +45,7 @@ router.get('/authenticated', (req, res) => {
 
 // Compile spotify data into query string for songkick API
 function songkickMashup(req, res) {
-    const username = spotifyApiData[0].body.id;
+    const username = spotifyApiData[0].body.display_name;
     let artists = [username];
 
     for (i = 1; i < 21; i += 2) {
