@@ -24,11 +24,8 @@ methods.forwardGeocode = async function (location) {
         //}
     } catch(error) {
         console.log('error', error.message);
+        return;
     };
 }
 
 module.exports = methods;
-// ... prints
-// Theresienhöhe 11, 80339 Munich, Germany
-// { lat: 48.1341651, lng: 11.5464794 }
-// Europe/Berlin

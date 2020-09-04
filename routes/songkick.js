@@ -7,7 +7,6 @@ const Songkick = require('songkick-api-node');
 const songkickApi = new Songkick(process.env.SONGKICK_KEY);
 
 let topArtistsGigs = [];
-let anotherlist = [];
 let spotifyData;
 
 async function songkickData(req, res, next) {
@@ -19,6 +18,7 @@ async function songkickData(req, res, next) {
     try {
       if (concertData.push(await songkickApi.searchEvents({ artist_name: spotifyData[i] }))) {
         concertData.push(spotifyData[i]);
+        concertData.push(spotifyData[i + 1]);
       }
     }
     catch {
@@ -26,33 +26,33 @@ async function songkickData(req, res, next) {
     }
   }
 
-  anotherlist = [];
   //Filtering concert results for shows occuring in Australia
   for (i = 0; i < concertData.length; i+=3) {
     try {
       for (k = 0; k < concertData[i].length; k++) {
         if (concertData[i][k].venue.metroArea.country.displayName === "Australia") {
-          topArtistsGigs.push(concertData[i][k]);
-          topArtistsGigs.push(concertData[i + 1]);
-          anotherlist.push(await opencage.forwardGeocode(concertData[i][k].venue.displayName + ", Australia"));
+          let data = {};
+          data.event = concertData[i][k];
+          data.artist = concertData[i + 1];
+          data.image = concertData[i + 2];
+          data.coordinates = await opencage.forwardGeocode(concertData[i][k].venue.displayName + ", Australia");
+          topArtistsGigs.push(data);
         } 
       }
     } catch {
       console.log("No Australian Gigs found");
     }
   }
-  //console.log(anotherlist);
-  for (i = 0; i < topArtistsGigs.length; i += 2) {
-    // console.log(topArtistsGigs[i].displayName);
-    //console.log(topArtistsGigs[i]);
-    //console.log(topArtistsGigs[i+1]);
+  console.log(topArtistsGigs);
+  for (i = 0; i < topArtistsGigs.length; i ++) {
+    console.log(topArtistsGigs[i]);
+
   }
 }
 
 async function retrieveData(req, res, next) {
   await songkickData(req, res, next);
-  console.log(anotherlist);
-  res.render('index', { title: "Hello", spotify: spotifyData, songkick: topArtistsGigs });
+  res.render('index', { title: "Gig Guide", spotify: spotifyData, songkick: topArtistsGigs });
 }
 
 /* GET users listing. */

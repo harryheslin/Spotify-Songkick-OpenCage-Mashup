@@ -58,11 +58,31 @@ h2 {
 h4 {
   text-align: left;
   color: white;
-  display: inline-block;
   padding-left: 5%;
   padding-right: 1%;
   font-size: calc(0.1em + 1vw);
+}
 
+button {
+  width: 80%;
+  color: white;
+  background-color: rgb(147, 148, 226);
+  font-size: calc(0.2em + 1vw);
+  padding-bottom: 10px;
+  padding-top: 5px;
+  border-radius: 25px;
+}
+
+.concert-div {
+  padding-bottom: 10px;
+  text-align: center;
+
+}
+
+#performing-artist {
+  text-align: left;
+  color: white;
+  font-size: calc(0.4em + 1vw);
 }
 
 
@@ -73,7 +93,12 @@ h4 {
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
+}
 
+#popup {
+  text-align: center;
+  color: black;
+  font-size: 15px;
 }
 
 .artist-pic {
