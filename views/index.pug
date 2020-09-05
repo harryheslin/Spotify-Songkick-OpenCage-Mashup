@@ -1,8 +1,6 @@
 extends layout
 
 block content
-  //- h1= title
-  //- p Welcome to #{title}
   div.title-bar
    h1.page-title #{spotify[0]} Top Artist Gig Guide
   div(class="page-div")
@@ -16,42 +14,28 @@ block content
 
     div.small-api-trans.third-trans
       #map
-        script.
-          let lat = -27.4698;
-          let lng = 153.0251;  
-            var mymap = L.map('map').setView([lat, lng], 12);
-            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',{
-              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1,
-              accessToken: "pk.eyJ1IjoiaGFycnloZXNsaW4iLCJhIjoiY2tlNnNkb213MTJuMTJxcXZ5aGdtbndqbCJ9.TTcRH7l0Q5f7Hmv3l5efvQ"
-            }).addTo(mymap);
-
-
+      script
+        include ../public/scripts/map.js
+        
     div.small-api-trans.second-trans
       img.logos(src="../images/sk-badge.png" alt="SongKick Logo")
       h1.div-titles Upcoming Gigs
-      -for (var i = 0; i < songkick.length; i++)
-        div.concert-div
-          div.artist-pic-div
-            h4#performing-artist #{songkick[i].artist}
-            h4 #{songkick[i].event.start.date} 
-            h4 #{songkick[i].event.displayName}
-            button(onclick='showOnMap(\'' + songkick[i].event.displayName + '\', \'' + songkick[i].event.venue.displayName +'\', \'' + songkick[i].image + '\',' + songkick[i].coordinates.lat + ', ' + songkick[i].coordinates.lng +')') Show me where
-            button(onclick='redirect(\''+ songkick[i].event.uri + '\')') Show me more details
-            script.
-              function showOnMap(event,venue,image, lat, lng) {
-                console.log('Im here!' + lat + " " + lng)
-                mymap.flyTo([lat, lng], 12);
-                marker = L.marker([lat, lng]).addTo(mymap); 
-                marker.bindPopup('<div id="popup"><img src = \'' + image + '\'width="35%"/><br />' + event + "<br />" +  venue + "</div>").openPopup();
-              }
+      -if (songkick.length > 0)
+        -for (var i = 0; i < songkick.length; i++)
+          div.concert-div
+            div.artist-pic-div
+              h4#performing-artist #{songkick[i].artist}
+              h4 #{songkick[i].event.start.date} 
+              h4 #{songkick[i].event.displayName}
+              -if (songkick[i].coordinates != undefined)
+                button(onclick='showOnMap(\'' + songkick[i].event.displayName + '\', \'' + songkick[i].event.venue.displayName +'\', \'' + songkick[i].image + '\',' + songkick[i].coordinates.lat + ', ' + songkick[i].coordinates.lng +')') Show Location   
+              button(onclick='redirect(\''+ songkick[i].event.uri + '\')') More Details
+              script
+                include ../public/scripts/location.js
+      -else
+        h4 No upcoming concerts &#128531;
 
-              function redirect(url) {
-                location.href= url;
-              }
+        
     
             
 
