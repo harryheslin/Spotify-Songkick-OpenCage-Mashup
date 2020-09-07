@@ -34,7 +34,7 @@ methods.retrieveApiData = async function(req, res, spotifyApi) {
     }
     catch (err) {
         console.log(err);
-        res.redirect('/');
+        res.render('error', { error: err});
     }
 }
 

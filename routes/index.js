@@ -8,6 +8,8 @@ const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 const spotifyClientID = process.env.SPOTIFY_CLIENT_ID;
 const spotifySecret = process.env.SPOTIFY_SECRET;
 
+
+
 let spotifyApi = new SpotifyWebApi({
     clientId: spotifyClientID,
     clientSecret: spotifySecret,
@@ -16,6 +18,9 @@ let spotifyApi = new SpotifyWebApi({
 
 // Authorize spotify API access
 router.get('/', (req, res) => {
+    if (redirectUri == undefined || spotifyClientID == undefined || spotifySecret == undefined) {
+        res.render('error', { error: "Please ensure keys in .env file are defined" })
+    }
     authorizeURL = spotifyApi.createAuthorizeURL(scopes);
     res.redirect(authorizeURL + "&show_dialog=true");
 })
@@ -32,7 +37,7 @@ router.get('/authenticated', (req, res) => {
             })
             .catch((e) => {
                 console.log('Something went wrong!', e);
-                res.redirect('/');
+                res.render('error', { error: e});
             })
     } else {
         res.redirect('/');

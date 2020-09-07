@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var spotifyRouter = require('./routes');
-
 
 var app = express();
 
@@ -35,7 +33,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error: err});
 });
 
 module.exports = app;

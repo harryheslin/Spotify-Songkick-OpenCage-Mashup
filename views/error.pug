@@ -1,6 +1,5 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+link(rel='stylesheet', href='/stylesheets/style.css')
+center
+    div 
+        h1.page-title Uh oh! #{error} &#128531; <br>
+        a(href = "/") Return to Login
