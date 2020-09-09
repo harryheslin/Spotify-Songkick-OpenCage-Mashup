@@ -29,7 +29,7 @@ block content
               h4 #{songkick[i].event.displayName}
               -if (songkick[i].coordinates != undefined)
                 button(onclick='showOnMap(\'' + songkick[i].event.displayName + '\', \'' + songkick[i].event.venue.displayName +'\', \'' + songkick[i].image + '\',' + songkick[i].coordinates.lat + ', ' + songkick[i].coordinates.lng +')') Show Location   
-              button(onclick='redirect(\''+ songkick[i].event.uri + '\')') More Details
+              button(onclick='redirect(\''+ songkick[i].event.uri + '\')') Purchase Tickets
               script
                 include ../public/scripts/location.js
       -else
